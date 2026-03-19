@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main School Menu -->
+    <menuitem id="menu_school_root" 
+              name="Online School" 
+              web_icon="online_school,static/description/icon.svg"
+              sequence="10"/>
+
+    <!-- Courses Submenu -->
+    <menuitem id="menu_school_courses" 
+              name="Courses" 
+              parent="menu_school_root" 
+              sequence="1"/>
+    
+    <menuitem id="menu_school_courses_all" 
+              name="All Courses" 
+              parent="menu_school_courses" 
+              action="action_school_course" 
+              sequence="1"/>
+    
+    <menuitem id="menu_school_lessons" 
+              name="Lessons" 
+              parent="menu_school_courses" 
+              action="action_school_lesson" 
+              sequence="2"/>
+
+    <!-- People Submenu -->
+    <menuitem id="menu_school_people" 
+              name="People" 
+              parent="menu_school_root" 
+              sequence="2"/>
+    
+    <menuitem id="menu_school_students" 
+              name="Students" 
+              parent="menu_school_people" 
+              action="action_school_student" 
+              sequence="1"/>
+    
+    <menuitem id="menu_school_teachers" 
+              name="Teachers" 
+              parent="menu_school_people" 
+              action="action_school_teacher" 
+              sequence="2"/>
+
+    <!-- Enrollments Submenu -->
+    <menuitem id="menu_school_enrollments" 
+              name="Enrollments" 
+              parent="menu_school_root" 
+              action="action_school_enrollment" 
+              sequence="3"/>
+</odoo>

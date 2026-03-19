@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Teacher Tree View -->
+    <record id="view_school_teacher_tree" model="ir.ui.view">
+        <field name="name">school.teacher.tree</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="teacher_number"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="specialization"/>
+                <field name="status"/>
+                <field name="course_count"/>
+                <field name="total_students"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Teacher Form View -->
+    <record id="view_school_teacher_form" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="teacher_number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" options="{'no_create': False}"/>
+                            <field name="name" readonly="1"/>
+                            <field name="email" readonly="1"/>
+                            <field name="phone" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="hire_date"/>
+                            <field name="status"/>
+                            <field name="experience_years"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="specialization"/>
+                        <field name="website"/>
+                    </group>
+                    <notebook>
+                        <page string="Biography">
+                            <field name="bio"/>
+                        </page>
+                        <page string="Qualifications">
+                            <field name="qualification"/>
+                        </page>
+                        <page string="Courses">
+                            <field name="course_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="state"/>
+                                    <field name="student_count"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Teacher Search View -->
+    <record id="view_school_teacher_search" model="ir.ui.view">
+        <field name="name">school.teacher.search</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="teacher_number"/>
+                <field name="email"/>
+                <field name="specialization"/>
+                <filter name="active" string="Active" domain="[('status', '=', 'active')]"/>
+                <filter name="on_leave" string="On Leave" domain="[('status', '=', 'on_leave')]"/>
+                <separator/>
+                <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Teacher Action -->
+    <record id="action_school_teacher" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="res_model">school.teacher</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_school_teacher_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register your first teacher
+            </p>
+            <p>
+                Teachers can be assigned to courses and manage lessons.
+            </p>
+        </field>
+    </record>
+</odoo>

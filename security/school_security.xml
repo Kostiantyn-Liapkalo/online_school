@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- User Groups -->
+    <record id="group_school_admin" model="res.groups">
+        <field name="name">School Administrator</field>
+        <field name="comment">Full access to all school features</field>
+    </record>
+
+    <record id="group_school_teacher" model="res.groups">
+        <field name="name">School Teacher</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can manage courses and students</field>
+    </record>
+
+    <record id="group_school_student" model="res.groups">
+        <field name="name">School Student</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can view courses and track progress</field>
+    </record>
+
+    <!-- Group hierarchy -->
+    <record id="group_school_teacher" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_school_student'))]"/>
+    </record>
+
+    <record id="group_school_admin" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_school_teacher'))]"/>
+    </record>
+
+    <!-- Record Rules -->
+    <!-- Students can only see their own enrollments -->
+    <record id="rule_school_enrollment_student" model="ir.rule">
+        <field name="name">Student: Own Enrollments Only</field>
+        <field name="model_id" ref="model_school_enrollment"/>
+        <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_school_student'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Teachers can see enrollments for courses they teach -->
+    <record id="rule_school_enrollment_teacher" model="ir.rule">
+        <field name="name">Teacher: Course Enrollments Only</field>
+        <field name="model_id" ref="model_school_enrollment"/>
+        <field name="domain_force">[('teacher_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Admins can see all enrollments -->
+    <record id="rule_school_enrollment_admin" model="ir.rule">
+        <field name="name">Admin: All Enrollments</field>
+        <field name="model_id" ref="model_school_enrollment"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_admin'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>

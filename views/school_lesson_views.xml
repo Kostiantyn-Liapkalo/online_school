@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Lesson Tree View -->
+    <record id="view_school_lesson_tree" model="ir.ui.view">
+        <field name="name">school.lesson.tree</field>
+        <field name="model">school.lesson</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="content_type"/>
+                <field name="duration_minutes"/>
+                <field name="is_preview"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Lesson Form View -->
+    <record id="view_school_lesson_form" model="ir.ui.view">
+        <field name="name">school.lesson.form</field>
+        <field name="model">school.lesson</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_publish" string="Publish" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_archive" string="Archive" type="object" invisible="state == 'archived'"/>
+                    <button name="action_draft" string="Set to Draft" type="object" invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,published,archived"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Lesson Title"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="course_id"/>
+                            <field name="sequence"/>
+                            <field name="content_type"/>
+                            <field name="duration_minutes"/>
+                        </group>
+                        <group>
+                            <field name="is_preview"/>
+                            <field name="is_required"/>
+                            <field name="attachment_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Video Content" invisible="content_type != 'video'" colspan="2">
+                        <field name="video_url" placeholder="https://youtube.com/watch?v=..."/>
+                        <field name="video_duration"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Brief description of this lesson"/>
+                        </page>
+                        <page string="Content">
+                            <field name="content" placeholder="Main lesson content..."/>
+                        </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Lesson Search View -->
+    <record id="view_school_lesson_search" model="ir.ui.view">
+        <field name="name">school.lesson.search</field>
+        <field name="model">school.lesson</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="course_id"/>
+                <filter name="published" string="Published" domain="[('state', '=', 'published')]"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="archived" string="Archived" domain="[('state', '=', 'archived')]"/>
+                <filter name="preview" string="Free Preview" domain="[('is_preview', '=', True)]"/>
+                <separator/>
+                <filter name="group_by_type" string="Content Type" context="{'group_by': 'content_type'}"/>
+                <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Lesson Action -->
+    <record id="action_school_lesson" model="ir.actions.act_window">
+        <field name="name">Lessons</field>
+        <field name="res_model">school.lesson</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_school_lesson_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first lesson
+            </p>
+            <p>
+                Lessons are the building blocks of courses. Add video, text, or quiz content.
+            </p>
+        </field>
+    </record>
+</odoo>

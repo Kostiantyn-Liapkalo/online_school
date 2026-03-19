@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Paper Format for Certificate -->
+    <record id="paperformat_certificate" model="report.paperformat">
+        <field name="name">Certificate A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Report Action -->
+    <record id="action_school_enrollment_certificate" model="ir.actions.report">
+        <field name="name">Enrollment Certificate</field>
+        <field name="model">school.enrollment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">online_school.report_enrollment_certificate</field>
+        <field name="report_file">online_school.report_enrollment_certificate</field>
+        <field name="paperformat_id" ref="paperformat_certificate"/>
+        <field name="binding_model_id" ref="model_school_enrollment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Template -->
+    <template id="report_enrollment_certificate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 style="font-size: 48px; color: #2c3e50; margin-bottom: 30px;">
+                                    Certificate of Completion
+                                </h1>
+                                <h3 style="color: #7f8c8d; margin-bottom: 50px;">
+                                    This certifies that
+                                </h3>
+                                <h2 style="font-size: 36px; color: #2980b9; margin-bottom: 30px;">
+                                    <span t-field="o.student_id.name"/>
+                                </h2>
+                                <h3 style="color: #7f8c8d; margin-bottom: 30px;">
+                                    has successfully completed
+                                </h3>
+                                <h2 style="font-size: 32px; color: #27ae60; margin-bottom: 50px;">
+                                    <span t-field="o.course_id.name"/>
+                                </h2>
+                                <div style="margin-top: 50px;">
+                                    <p style="font-size: 18px;">
+                                        <strong>Enrollment Number:</strong>
+                                        <span t-field="o.enrollment_number"/>
+                                    </p>
+                                    <p style="font-size: 18px;">
+                                        <strong>Completion Date:</strong>
+                                        <span t-field="o.completion_date"/>
+                                    </p>
+                                    <p style="font-size: 18px;">
+                                        <strong>Final Grade:</strong>
+                                        <span t-field="o.final_grade"/>
+                                    </p>
+                                </div>
+                                <div style="margin-top: 80px;">
+                                    <div class="row">
+                                        <div class="col-6 text-center">
+                                            <div style="border-top: 1px solid #000; width: 200px; margin: 0 auto; padding-top: 10px;">
+                                                <span t-field="o.teacher_id.name"/>
+                                                <br/>
+                                                <small>Instructor</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <div style="border-top: 1px solid #000; width: 200px; margin: 0 auto; padding-top: 10px;">
+                                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                                                <br/>
+                                                <small>Date</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

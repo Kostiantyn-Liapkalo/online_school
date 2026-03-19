@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enrollment Tree View -->
+    <record id="view_school_enrollment_tree" model="ir.ui.view">
+        <field name="name">school.enrollment.tree</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="enrollment_number"/>
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <field name="teacher_id"/>
+                <field name="state"/>
+                <field name="enrollment_date"/>
+                <field name="progress_percentage"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Enrollment Form View -->
+    <record id="view_school_enrollment_form" model="ir.ui.view">
+        <field name="name">school.enrollment.form</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_activate" string="Activate" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_complete" string="Complete" type="object" class="oe_highlight" invisible="state != 'active'"/>
+                    <button name="action_drop" string="Drop" type="object" invisible="state in ['dropped', 'completed']"/>
+                    <button name="action_suspend" string="Suspend" type="object" invisible="state != 'active'"/>
+                    <button name="action_issue_certificate" string="Issue Certificate" type="object" invisible="state != 'completed' or certificate_issued"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,completed,dropped"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="enrollment_number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="course_id"/>
+                            <field name="teacher_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="enrollment_date"/>
+                            <field name="start_date"/>
+                            <field name="completion_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="progress_percentage" widget="progressbar"/>
+                            <field name="completed_lessons"/>
+                            <field name="total_lessons" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="final_grade"/>
+                            <field name="certificate_issued"/>
+                            <field name="certificate_number" invisible="not certificate_issued"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Enrollment Search View -->
+    <record id="view_school_enrollment_search" model="ir.ui.view">
+        <field name="name">school.enrollment.search</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="enrollment_number"/>
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+                <filter name="dropped" string="Dropped" domain="[('state', '=', 'dropped')]"/>
+                <separator/>
+                <filter name="group_by_course" string="Course" context="{'group_by': 'course_id'}"/>
+                <filter name="group_by_student" string="Student" context="{'group_by': 'student_id'}"/>
+                <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Enrollment Pivot View -->
+    <record id="view_school_enrollment_pivot" model="ir.ui.view">
+        <field name="name">school.enrollment.pivot</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <pivot string="Enrollments Analysis">
+                <field name="course_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="progress_percentage" type="measure" avg="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Enrollment Graph View -->
+    <record id="view_school_enrollment_graph" model="ir.ui.view">
+        <field name="name">school.enrollment.graph</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <graph string="Enrollments Statistics" type="bar">
+                <field name="course_id" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Enrollment Kanban View -->
+    <record id="view_school_enrollment_kanban" model="ir.ui.view">
+        <field name="name">school.enrollment.kanban</field>
+        <field name="model">school.enrollment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="enrollment_number"/></strong>
+                                <div><field name="student_id"/></div>
+                                <div><field name="course_id"/></div>
+                                <div>Progress: <field name="progress_percentage" widget="progressbar"/></div>
+                                <div><span class="badge"><t t-esc="record.state.value"/></span></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Enrollment Action -->
+    <record id="action_school_enrollment" model="ir.actions.act_window">
+        <field name="name">Enrollments</field>
+        <field name="res_model">school.enrollment</field>
+        <field name="view_mode">list,form,kanban,pivot,graph</field>
+        <field name="search_view_id" ref="view_school_enrollment_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first enrollment
+            </p>
+            <p>
+                Enrollments link students to courses.
+            </p>
+        </field>
+    </record>
+</odoo>

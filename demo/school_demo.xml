@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Teacher Contacts -->
+        <record id="demo_teacher_partner_1" model="res.partner">
+            <field name="name">Dr. Sarah Johnson</field>
+            <field name="email">sarah.johnson@school.demo</field>
+            <field name="phone">+1 555-0101</field>
+            <field name="function">Professor of Computer Science</field>
+        </record>
+
+        <record id="demo_teacher_partner_2" model="res.partner">
+            <field name="name">Prof. Michael Chen</field>
+            <field name="email">michael.chen@school.demo</field>
+            <field name="phone">+1 555-0102</field>
+            <field name="function">Mathematics Instructor</field>
+        </record>
+
+        <!-- Demo Student Contacts -->
+        <record id="demo_student_partner_1" model="res.partner">
+            <field name="name">Alice Williams</field>
+            <field name="email">alice.williams@student.demo</field>
+            <field name="phone">+1 555-0201</field>
+        </record>
+
+        <record id="demo_student_partner_2" model="res.partner">
+            <field name="name">Bob Martinez</field>
+            <field name="email">bob.martinez@student.demo</field>
+            <field name="phone">+1 555-0202</field>
+        </record>
+
+        <!-- Demo Teachers -->
+        <record id="demo_teacher_1" model="school.teacher">
+            <field name="partner_id" ref="demo_teacher_partner_1"/>
+            <field name="specialization">Computer Science, Programming</field>
+            <field name="qualification">PhD in Computer Science, 15 years teaching experience</field>
+            <field name="experience_years">15</field>
+            <field name="bio">Experienced computer science educator specializing in Python, web development, and database systems.</field>
+        </record>
+
+        <record id="demo_teacher_2" model="school.teacher">
+            <field name="partner_id" ref="demo_teacher_partner_2"/>
+            <field name="specialization">Mathematics, Statistics</field>
+            <field name="qualification">PhD in Applied Mathematics</field>
+            <field name="experience_years">10</field>
+            <field name="bio">Mathematics professor with expertise in calculus, linear algebra, and statistical analysis.</field>
+        </record>
+
+        <!-- Demo Students -->
+        <record id="demo_student_1" model="school.student">
+            <field name="partner_id" ref="demo_student_partner_1"/>
+            <field name="date_of_birth">1995-03-15</field>
+            <field name="notes">Computer Science major, interested in AI and machine learning.</field>
+        </record>
+
+        <record id="demo_student_2" model="school.student">
+            <field name="partner_id" ref="demo_student_partner_2"/>
+            <field name="date_of_birth">1993-07-22</field>
+            <field name="notes">Data Science enthusiast, working professional.</field>
+        </record>
+
+        <!-- Demo Courses -->
+        <record id="demo_course_1" model="school.course">
+            <field name="name">Introduction to Python Programming</field>
+            <field name="code">COURSE-0001</field>
+            <field name="teacher_id" ref="demo_teacher_1"/>
+            <field name="short_description">Learn Python programming from scratch.</field>
+            <field name="description">&lt;p&gt;A comprehensive introduction to Python programming language. Covers basics, data structures, functions, and object-oriented programming.&lt;/p&gt;</field>
+            <field name="difficulty">beginner</field>
+            <field name="duration_hours">40</field>
+            <field name="start_date">2026-01-15</field>
+            <field name="end_date">2026-03-15</field>
+            <field name="state">published</field>
+        </record>
+
+        <record id="demo_course_2" model="school.course">
+            <field name="name">Advanced Data Analysis</field>
+            <field name="code">COURSE-0002</field>
+            <field name="teacher_id" ref="demo_teacher_2"/>
+            <field name="short_description">Master data analysis techniques and tools.</field>
+            <field name="description">&lt;p&gt;Advanced course covering statistical analysis, data visualization, and practical applications using Python and R.&lt;/p&gt;</field>
+            <field name="difficulty">advanced</field>
+            <field name="duration_hours">60</field>
+            <field name="start_date">2026-02-01</field>
+            <field name="end_date">2026-05-01</field>
+            <field name="state">published</field>
+        </record>
+
+        <!-- Demo Lessons for Course 1 -->
+        <record id="demo_lesson_1_1" model="school.lesson">
+            <field name="name">Getting Started with Python</field>
+            <field name="course_id" ref="demo_course_1"/>
+            <field name="sequence">10</field>
+            <field name="content_type">text</field>
+            <field name="description">Introduction to Python, installation, and first program.</field>
+            <field name="content">&lt;h2&gt;Welcome to Python!&lt;/h2&gt;&lt;p&gt;In this lesson, you will learn how to install Python and write your first program.&lt;/p&gt;</field>
+            <field name="duration_minutes">45</field>
+            <field name="is_preview">True</field>
+            <field name="is_required">True</field>
+            <field name="state">published</field>
+        </record>
+
+        <record id="demo_lesson_1_2" model="school.lesson">
+            <field name="name">Variables and Data Types</field>
+            <field name="course_id" ref="demo_course_1"/>
+            <field name="sequence">20</field>
+            <field name="content_type">text</field>
+            <field name="description">Understanding Python variables and basic data types.</field>
+            <field name="content">&lt;h2&gt;Variables in Python&lt;/h2&gt;&lt;p&gt;Learn about strings, integers, floats, booleans, and type conversion.&lt;/p&gt;</field>
+            <field name="duration_minutes">60</field>
+            <field name="is_preview">False</field>
+            <field name="is_required">True</field>
+            <field name="state">published</field>
+        </record>
+
+        <record id="demo_lesson_1_3" model="school.lesson">
+            <field name="name">Control Flow and Loops</field>
+            <field name="course_id" ref="demo_course_1"/>
+            <field name="sequence">30</field>
+            <field name="content_type">video</field>
+            <field name="description">If statements, for loops, and while loops.</field>
+            <field name="video_url">https://www.youtube.com/watch?v=dQw4w9WgXcQ</field>
+            <field name="video_duration">30</field>
+            <field name="duration_minutes">45</field>
+            <field name="is_preview">False</field>
+            <field name="is_required">True</field>
+            <field name="state">published</field>
+        </record>
+
+        <!-- Demo Enrollments -->
+        <record id="demo_enrollment_1" model="school.enrollment">
+            <field name="enrollment_number">ENR-00001</field>
+            <field name="student_id" ref="demo_student_1"/>
+            <field name="course_id" ref="demo_course_1"/>
+            <field name="state">active</field>
+            <field name="enrollment_date">2026-01-10</field>
+            <field name="start_date">2026-01-15</field>
+            <field name="progress_percentage">35.0</field>
+            <field name="completed_lessons">1</field>
+        </record>
+
+        <record id="demo_enrollment_2" model="school.enrollment">
+            <field name="enrollment_number">ENR-00002</field>
+            <field name="student_id" ref="demo_student_2"/>
+            <field name="course_id" ref="demo_course_2"/>
+            <field name="state">draft</field>
+            <field name="enrollment_date">2026-01-20</field>
+        </record>
+    </data>
+</odoo>

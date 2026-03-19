@@ -1,0 +1,24 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+school_course_full,school.course full access,model_school_course,online_school.group_school_admin,1,1,1,1
+school_course_teacher,school.course teacher access,model_school_course,online_school.group_school_teacher,1,1,0,0
+school_course_student,school.course student access,model_school_course,online_school.group_school_student,1,0,0,0
+
+school_student_full,school.student full access,model_school_student,online_school.group_school_admin,1,1,1,1
+school_student_teacher,school.student teacher access,model_school_student,online_school.group_school_teacher,1,1,1,0
+school_student_own,school.student own access,model_school_student,online_school.group_school_student,1,0,0,0
+
+school_teacher_full,school.teacher full access,model_school_teacher,online_school.group_school_admin,1,1,1,1
+school_teacher_teacher,school.teacher teacher access,model_school_teacher,online_school.group_school_teacher,1,1,0,0
+school_teacher_read,school.teacher read access,model_school_teacher,online_school.group_school_student,1,0,0,0
+
+school_enrollment_full,school.enrollment full access,model_school_enrollment,online_school.group_school_admin,1,1,1,1
+school_enrollment_teacher,school.enrollment teacher access,model_school_enrollment,online_school.group_school_teacher,1,1,1,0
+school_enrollment_own,school.enrollment own access,model_school_enrollment,online_school.group_school_student,1,0,0,0
+
+school_lesson_full,school.lesson full access,model_school_lesson,online_school.group_school_admin,1,1,1,1
+school_lesson_teacher,school.lesson teacher access,model_school_lesson,online_school.group_school_teacher,1,1,1,0
+school_lesson_student,school.lesson student access,model_school_lesson,online_school.group_school_student,1,0,0,0
+
+school_enrollment_wizard_admin,enrollment wizard admin,model_school_enrollment_wizard,online_school.group_school_admin,1,1,1,1
+school_enrollment_wizard_teacher,enrollment wizard teacher,model_school_enrollment_wizard,online_school.group_school_teacher,1,1,1,0
+school_enrollment_wizard_student,enrollment wizard student,model_school_enrollment_wizard,online_school.group_school_student,1,0,0,0

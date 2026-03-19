@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enrollment Wizard Form View -->
+    <record id="view_school_enrollment_wizard_form" model="ir.ui.view">
+        <field name="name">school.enrollment.wizard.form</field>
+        <field name="model">school.enrollment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="course_id"/>
+                        <field name="teacher_id"/>
+                        <field name="enrollment_date"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="student_ids" widget="many2many_tags"/>
+                </group>
+                <group>
+                    <field name="notes"/>
+                </group>
+                <footer>
+                    <button name="action_enroll_students" string="Enroll Students" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Enrollment Wizard Action -->
+    <record id="action_school_enrollment_wizard" model="ir.actions.act_window">
+        <field name="name">Enroll Students</field>
+        <field name="res_model">school.enrollment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu for Wizard -->
+    <menuitem id="menu_school_enrollment_wizard"
+              name="Enroll Students"
+              parent="menu_school_enrollments"
+              action="action_school_enrollment_wizard"
+              sequence="20"/>
+</odoo>

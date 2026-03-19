@@ -1,0 +1,224 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#  * online_school
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: uk_UA\n"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__active
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__active
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__active
+#: model:ir.model.fields,field_description:online_school.field_school_student__active
+#: model:ir.model.fields,field_description:online_school.field_school_teacher__active
+msgid "Active"
+msgstr "Активний"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_enrollment__state__active
+#: model:ir.model.fields.selection,name:online_school.selection__school_student__status__active
+#: model:ir.model.fields.selection,name:online_school.selection__school_teacher__status__active
+msgid "Active"
+msgstr "Активний"
+
+#. module: online_school
+#: model_terms:ir.ui.view,arch_db:online_school.view_school_course_form
+msgid "Add Lesson"
+msgstr "Додати урок"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_student__age
+msgid "Age"
+msgstr "Вік"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__certificate_issued
+msgid "Certificate Issued"
+msgstr "Сертифікат виданий"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__certificate_number
+msgid "Certificate Number"
+msgstr "Номер сертифікату"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__completion_date
+msgid "Completion Date"
+msgstr "Дата завершення"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__completed_lessons
+msgid "Completed Lessons"
+msgstr "Завершені уроки"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__content
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__content
+msgid "Content"
+msgstr "Зміст"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__content_type
+msgid "Content Type"
+msgstr "Тип контенту"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__course_ref
+msgid "Course Reference"
+msgstr "Посилання на курс"
+
+#. module: online_school
+#: model:ir.model,name:online_school.model_school_course
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__course_id
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__course_id
+#: model:ir.ui.menu,name:online_school.menu_school_course_root
+msgid "Course"
+msgstr "Курс"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__name
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__name
+#: model:ir.model.fields,field_description:online_school.field_school_student__name
+#: model:ir.model.fields,field_description:online_school.field_school_teacher__name
+msgid "Name"
+msgstr "Назва"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__code
+msgid "Course Code"
+msgstr "Код курсу"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__enrollment_date
+msgid "Enrollment Date"
+msgstr "Дата зарахування"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__enrollment_number
+msgid "Enrollment Number"
+msgstr "Номер зарахування"
+
+#. module: online_school
+#: model:ir.model,name:online_school.model_school_enrollment
+msgid "Enrollment"
+msgstr "Зарахування"
+
+#. module: online_school
+#: model:ir.ui.menu,name:online_school.menu_school_enrollment_root
+msgid "Enrollments"
+msgstr "Зарахування"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__final_grade
+msgid "Final Grade"
+msgstr "Фінальна оцінка"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_course__difficulty__intermediate
+msgid "Intermediate"
+msgstr "Середній"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_course__difficulty__beginner
+msgid "Beginner"
+msgstr "Початковий"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_course__difficulty__advanced
+msgid "Advanced"
+msgstr "Просунутий"
+
+#. module: online_school
+#: model:ir.model,name:online_school.model_school_lesson
+msgid "Lesson"
+msgstr "Урок"
+
+#. module: online_school
+#: model:ir.ui.menu,name:online_school.menu_school_lesson_root
+msgid "Lessons"
+msgstr "Уроки"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__lesson_count
+msgid "Lesson Count"
+msgstr "Кількість уроків"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_student__notes
+#: model:ir.model.fields,field_description:online_school.field_school_teacher__notes
+msgid "Notes"
+msgstr "Нотатки"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__teacher_id
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__teacher_id
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__create_uid
+msgid "Teacher"
+msgstr "Викладач"
+
+#. module: online_school
+#: model:ir.model,name:online_school.model_school_teacher
+#: model:ir.ui.menu,name:online_school.menu_school_teacher_root
+msgid "Teacher"
+msgstr "Викладач"
+
+#. module: online_school
+#: model:ir.model,name:online_school.model_school_student
+#: model:ir.ui.menu,name:online_school.menu_school_student_root
+msgid "Student"
+msgstr "Студент"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__progress_percentage
+msgid "Progress"
+msgstr "Прогрес"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_course__state
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__state
+#: model:ir.model.fields,field_description:online_school.field_school_lesson__state
+msgid "State"
+msgstr "Статус"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_course__state__published
+#: model:ir.model.fields.selection,name:online_school.selection__school_lesson__state__published
+msgid "Published"
+msgstr "Опубліковано"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_course__state__draft
+#: model:ir.model.fields.selection,name:online_school.selection__school_lesson__state__draft
+msgid "Draft"
+msgstr "Чернетка"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_enrollment__state__completed
+msgid "Completed"
+msgstr "Завершено"
+
+#. module: online_school
+#: model:ir.model.fields.selection,name:online_school.selection__school_enrollment__state__dropped
+msgid "Dropped"
+msgstr "Виключено"
+
+#. module: online_school
+#: model:ir.model.fields,field_description:online_school.field_school_enrollment__student_id
+msgid "Student"
+msgstr "Студент"
+
+#. module: online_school
+#: model:ir.ui.menu,name:online_school.menu_school_root
+msgid "Online School"
+msgstr "Онлайн Школа"
