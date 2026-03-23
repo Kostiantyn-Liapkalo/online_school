@@ -4,6 +4,8 @@
     <menuitem id="menu_school_root" 
               name="Online School" 
               web_icon="online_school,static/description/icon.svg"
+              action="action_school_course"
+              groups="base.group_user"
               sequence="10"/>
 
     <!-- Courses Submenu -->
