@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class SchoolLesson(models.Model):
     """
     Lesson model representing a single unit of course content.
-    
+
     Lessons are ordered within a course and can contain
     various content types: video, text, quiz, etc.
     """
@@ -22,11 +22,10 @@ class SchoolLesson(models.Model):
         tracking=True
     )
     sequence = fields.Integer(
-        string='Sequence',
         default=10,
         help='Order within the course'
     )
-    
+
     # Relations
     course_id = fields.Many2one(
         'school.course',
@@ -42,7 +41,7 @@ class SchoolLesson(models.Model):
         store=True,
         readonly=True
     )
-    
+
     # Content
     content_type = fields.Selection([
         ('video', 'Video'),
@@ -50,8 +49,8 @@ class SchoolLesson(models.Model):
         ('quiz', 'Quiz'),
         ('assignment', 'Assignment'),
         ('mixed', 'Mixed Content')
-    ], string='Content Type', default='text', required=True)
-    
+    ], default='text', required=True)
+
     description = fields.Text(
         string='Short Description'
     )
@@ -59,7 +58,7 @@ class SchoolLesson(models.Model):
         string='Lesson Content',
         help='Main lesson content in HTML format'
     )
-    
+
     # Video Fields
     video_url = fields.Char(
         string='Video URL',
@@ -69,7 +68,7 @@ class SchoolLesson(models.Model):
         string='Video Duration (minutes)',
         help='Video length in minutes'
     )
-    
+
     # Lesson Settings
     duration_minutes = fields.Integer(
         string='Estimated Duration (minutes)',
@@ -86,14 +85,14 @@ class SchoolLesson(models.Model):
         default=True,
         help='Must be completed to finish the course'
     )
-    
+
     # Status
     state = fields.Selection([
         ('draft', 'Draft'),
         ('published', 'Published'),
         ('archived', 'Archived')
     ], string='Status', default='draft', tracking=True)
-    
+
     # Additional Resources
     attachment_ids = fields.Many2many(
         'ir.attachment',
@@ -102,38 +101,37 @@ class SchoolLesson(models.Model):
         'attachment_id',
         string='Attachments'
     )
-    
+
     # Computed Fields
     attachment_count = fields.Integer(
         string='Attachments Count',
         compute='_compute_attachment_count'
     )
-    
+
     active = fields.Boolean(
-        string='Active',
         default=True
     )
-    
+
     # Compute Methods
     @api.depends('attachment_ids')
     def _compute_attachment_count(self):
         """Count attached files."""
         for lesson in self:
             lesson.attachment_count = len(lesson.attachment_ids)
-    
+
     # Actions
     def action_publish(self):
         """Publish the lesson."""
         self.write({'state': 'published'})
-    
+
     def action_archive(self):
         """Archive the lesson."""
         self.write({'state': 'archived'})
-    
+
     def action_draft(self):
         """Set lesson to draft."""
         self.write({'state': 'draft'})
-    
+
     # Constraints
     @api.constrains('video_url')
     def _check_video_url(self):

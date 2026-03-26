@@ -3,7 +3,7 @@
 Wizard for enrolling multiple students to a course.
 """
 
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class SchoolEnrollmentWizard(models.TransientModel):
@@ -30,13 +30,11 @@ class SchoolEnrollmentWizard(models.TransientModel):
         help='Teacher assigned to the enrollments'
     )
     enrollment_date = fields.Date(
-        string='Enrollment Date',
         default=fields.Date.today,
         required=True,
         help='Date of enrollment'
     )
     notes = fields.Text(
-        string='Notes',
         help='Additional notes for the enrollment'
     )
 

@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class SchoolTeacher(models.Model):
     """
     Teacher model for online school.
-    
+
     Links to res.partner for contact information.
     Teachers can be assigned to multiple courses.
     """
@@ -17,13 +17,12 @@ class SchoolTeacher(models.Model):
 
     # Teacher Identification
     teacher_number = fields.Char(
-        string='Teacher Number',
         required=True,
         copy=False,
         readonly=True,
         default=lambda self: self.env['ir.sequence'].next_by_code('school.teacher')
     )
-    
+
     # Link to Partner
     user_id = fields.Many2one(
         'res.users',
@@ -57,10 +56,9 @@ class SchoolTeacher(models.Model):
         store=True,
         readonly=True
     )
-    
+
     # Professional Information
     specialization = fields.Char(
-        string='Specialization',
         help='Subject area or teaching specialty'
     )
     qualification = fields.Text(
@@ -71,10 +69,9 @@ class SchoolTeacher(models.Model):
         string='Years of Experience',
         default=0
     )
-    
+
     # Employment
     hire_date = fields.Date(
-        string='Hire Date',
         default=fields.Date.today
     )
     status = fields.Selection([
@@ -82,24 +79,23 @@ class SchoolTeacher(models.Model):
         ('on_leave', 'On Leave'),
         ('inactive', 'Inactive')
     ], string='Teacher Status', default='active', tracking=True)
-    
+
     # Relations
     course_ids = fields.One2many(
         'school.course',
         'teacher_id',
         string='Teaching Courses'
     )
-    
+
     # Computed Fields
     course_count = fields.Integer(
         string='Number of Courses',
         compute='_compute_course_count'
     )
     total_students = fields.Integer(
-        string='Total Students',
         compute='_compute_total_students'
     )
-    
+
     # Additional Info
     bio = fields.Html(
         string='Biography',
@@ -108,19 +104,18 @@ class SchoolTeacher(models.Model):
     website = fields.Char(
         string='Personal Website'
     )
-    
+
     active = fields.Boolean(
-        string='Active',
         default=True
     )
-    
+
     # Compute Methods
     @api.depends('course_ids')
     def _compute_course_count(self):
         """Count assigned courses."""
         for teacher in self:
             teacher.course_count = len(teacher.course_ids)
-    
+
     @api.depends('course_ids.enrollment_ids')
     def _compute_total_students(self):
         """Count total students across all courses."""
@@ -131,7 +126,7 @@ class SchoolTeacher(models.Model):
                     lambda e: e.state == 'active'
                 ))
             teacher.total_students = total
-    
+
     # Constraints
     @api.constrains('partner_id')
     def _check_unique_partner(self):

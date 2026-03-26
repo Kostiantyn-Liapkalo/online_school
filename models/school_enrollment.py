@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class SchoolEnrollment(models.Model):
     """
     Enrollment model linking students to courses.
-    
+
     Tracks student enrollment status, progress, and completion.
     """
     _name = 'school.enrollment'
@@ -21,13 +21,12 @@ class SchoolEnrollment(models.Model):
         store=True
     )
     enrollment_number = fields.Char(
-        string='Enrollment Number',
         required=True,
         copy=False,
         readonly=True,
         default=lambda self: self.env['ir.sequence'].next_by_code('school.enrollment')
     )
-    
+
     # Relations
     student_id = fields.Many2one(
         'school.student',
@@ -50,7 +49,7 @@ class SchoolEnrollment(models.Model):
         store=True,
         readonly=True
     )
-    
+
     # Enrollment Status
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -59,20 +58,15 @@ class SchoolEnrollment(models.Model):
         ('dropped', 'Dropped'),
         ('suspended', 'Suspended')
     ], string='Status', default='draft', tracking=True)
-    
+
     # Dates
     enrollment_date = fields.Date(
-        string='Enrollment Date',
         default=fields.Date.today,
         tracking=True
     )
-    start_date = fields.Date(
-        string='Start Date'
-    )
-    completion_date = fields.Date(
-        string='Completion Date'
-    )
-    
+    start_date = fields.Date()
+    completion_date = fields.Date()
+
     # Progress Tracking
     progress_percentage = fields.Float(
         string='Progress (%)',
@@ -80,7 +74,6 @@ class SchoolEnrollment(models.Model):
         help='Completion percentage'
     )
     completed_lessons = fields.Integer(
-        string='Completed Lessons',
         default=0
     )
     total_lessons = fields.Integer(
@@ -89,7 +82,7 @@ class SchoolEnrollment(models.Model):
         store=True,
         readonly=True
     )
-    
+
     # Grading
     final_grade = fields.Selection([
         ('a', 'A - Excellent'),
@@ -97,27 +90,21 @@ class SchoolEnrollment(models.Model):
         ('c', 'C - Satisfactory'),
         ('d', 'D - Pass'),
         ('f', 'F - Fail')
-    ], string='Final Grade')
-    
+    ])
+
     # Certificate
     certificate_issued = fields.Boolean(
-        string='Certificate Issued',
         default=False
     )
-    certificate_number = fields.Char(
-        string='Certificate Number'
-    )
-    
+    certificate_number = fields.Char()
+
     # Additional Info
-    notes = fields.Text(
-        string='Notes'
-    )
-    
+    notes = fields.Text()
+
     active = fields.Boolean(
-        string='Active',
         default=True
     )
-    
+
     # Compute Methods
     @api.depends('student_id', 'course_id')
     def _compute_name(self):
@@ -127,7 +114,7 @@ class SchoolEnrollment(models.Model):
                 enrollment.name = f"{enrollment.student_id.name} - {enrollment.course_id.name}"
             else:
                 enrollment.name = f"Enrollment #{enrollment.id}"
-    
+
     # Constraints
     @api.constrains('student_id', 'course_id')
     def _check_unique_enrollment(self):
@@ -143,12 +130,12 @@ class SchoolEnrollment(models.Model):
                 raise ValidationError(
                     f'Student is already enrolled in this course.'
                 )
-    
+
     # Actions
     def action_activate(self):
         """Activate enrollment."""
         self.write({'state': 'active', 'start_date': fields.Date.today()})
-    
+
     def action_complete(self):
         """Mark enrollment as completed."""
         self.write({
@@ -156,15 +143,15 @@ class SchoolEnrollment(models.Model):
             'completion_date': fields.Date.today(),
             'progress_percentage': 100.0
         })
-    
+
     def action_drop(self):
         """Drop enrollment."""
         self.write({'state': 'dropped'})
-    
+
     def action_suspend(self):
         """Suspend enrollment."""
         self.write({'state': 'suspended'})
-    
+
     def action_issue_certificate(self):
         """Issue completion certificate."""
         for enrollment in self:

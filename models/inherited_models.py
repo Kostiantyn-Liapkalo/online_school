@@ -12,12 +12,10 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     is_student = fields.Boolean(
-        string='Is Student',
         default=False,
         help='Mark if this partner is a school student'
     )
     is_teacher = fields.Boolean(
-        string='Is Teacher',
         default=False,
         help='Mark if this partner is a school teacher'
     )
