@@ -149,11 +149,23 @@
         </field>
     </record>
 
+    <record id="view_school_course_graph" model="ir.ui.view">
+        <field name="name">school.course.graph</field>
+        <field name="model">school.course</field>
+        <field name="arch" type="xml">
+            <graph string="Courses Statistics" type="bar">
+                <field name="start_date" type="col" interval="month"/>
+                <field name="state" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- Course Action -->
     <record id="action_school_course" model="ir.actions.act_window">
         <field name="name">Courses</field>
         <field name="res_model">school.course</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">kanban,list,form,graph</field>
         <field name="search_view_id" ref="view_school_course_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

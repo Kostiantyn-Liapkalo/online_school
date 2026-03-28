@@ -3,7 +3,7 @@
     <!-- Paper Format for Certificate -->
     <record id="paperformat_certificate" model="report.paperformat">
         <field name="name">Certificate A4</field>
-        <field name="default" eval="True"/>
+        <field name="default" eval="False"/>
         <field name="format">A4</field>
         <field name="page_height">0</field>
         <field name="page_width">0</field>
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-6 text-center">
                                             <div style="border-top: 1px solid #000; width: 200px; margin: 0 auto; padding-top: 10px;">
-                                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                                                <span t-field="o.completion_date"/>
                                                 <br/>
                                                 <small>Date</small>
                                             </div>

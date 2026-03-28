@@ -112,7 +112,8 @@
         <field name="model">school.enrollment</field>
         <field name="arch" type="xml">
             <graph string="Enrollments Statistics" type="bar">
-                <field name="course_id" type="row"/>
+                <field name="enrollment_date" type="col" interval="month"/>
+                <field name="state" type="row"/>
                 <field name="id" type="measure"/>
             </graph>
         </field>
